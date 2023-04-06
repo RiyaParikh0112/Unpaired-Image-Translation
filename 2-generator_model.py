@@ -1,3 +1,9 @@
+'''This function implements the 70X70 patchGAN discriminator model. 
+The model takes 256X256 sized image as input and outputs a patch of perdictions.
+the model is optimized using least square loss (implemented as mean squared error), and a weighting is used so that the updates if the model 
+have half (0.5) the usual effect.
+(this was reccomended by the authors of the paper to slow down the changes to the discriminator relative to the generator model during training)'''
+
 def define_discriminator(image_shape):
     #weight initialization
     init = RandomNormal(stddev=0.02)
