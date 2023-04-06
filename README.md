@@ -22,10 +22,10 @@ Domain B -> Generator A -> Domain A
 
 The first discriminator model (Discriminator-A) takes real images form Domain-A and generated images from Generator-A and **predict whether they are real/fake** and likewise from Discriminator-B.
 
--Domain-A -> Discriminator-A -> [Real/Fake]\
--Domain-B -> Generator-A -> Discriminator-A -> [Real/Fake]\
--Domain-B -> Discriminator-B -> [Real/Fake]\
--Domain-A -> Generator-B -> Discriminator-B -> [Real/Fake]
+- Domain-A -> Discriminator-A -> [Real/Fake]
+- Domain-B -> Generator-A -> Discriminator-A -> [Real/Fake]
+- Domain-B -> Discriminator-B -> [Real/Fake]
+- Domain-A -> Generator-B -> Discriminator-B -> [Real/Fake]
 
 **Training is done in adversial zero-sum process** which means the generator learn to better fool the discriminator and the discriminator learns to better detect the fake images.\
 
@@ -33,4 +33,9 @@ The generator models are regularized not just to create new images in target dom
 
 - Domain-B -> Generator-A -> Domain-A -> Generator-B ->Domain-B
 - Domain-A -> Generator-B -> Domain-B -> Generator-A -> Domain-A
+
+Next step in the Architecture is **identity mapping**. In this step the generator is provided with inputs from the target domain and is expected to *generate the same image without change*. This step of the architecture is not a compulsion but this results in better matching of the color profile of the input image.
+
+- Domain-A -> Generator-A -> Domain-A
+- Domain-B -> Generator-B -> Domain-B
 
