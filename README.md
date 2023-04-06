@@ -38,4 +38,3 @@ Next step in the Architecture is **identity mapping**. In this step the generato
 
 - Domain-A -> Generator-A -> Domain-A
 - Domain-B -> Generator-B -> Domain-B
-
