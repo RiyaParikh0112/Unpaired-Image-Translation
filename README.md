@@ -38,3 +38,5 @@ Next step in the Architecture is **identity mapping**. In this step the generato
 
 - Domain-A -> Generator-A -> Domain-A
 - Domain-B -> Generator-B -> Domain-B
+
+![Simplified Architecture of CycleGAN](https://i.ibb.co/BVDkhVV/Screenshot-2023-04-06-at-7-40-10-AM.png)
