@@ -12,3 +12,25 @@ The code was implemented after taking reference from the Paper by Jan-Yan Zhu in
 The model Architecture is compromised of two generator models.
 1. One generator (Generator-A) for training images for the first domain.(Domain-A)
 2. Second generator(Generator-B)for generating images for the second domain (Domain-B)
+
+The generator model performs **Image translation**
+
+Domain A -> Generator B -> Domain B \
+Domain B -> Generator A -> Domain A 
+
+- There is a corresponding discriminator model for every generator.
+
+The first discriminator model (Discriminator-A) takes real images form Domain-A and generated images from Generator-A and **predict whether they are real/fake** and likewise from Discriminator-B.
+
+-Domain-A -> Discriminator-A -> [Real/Fake]\
+-Domain-B -> Generator-A -> Discriminator-A -> [Real/Fake]\
+-Domain-B -> Discriminator-B -> [Real/Fake]\
+-Domain-A -> Generator-B -> Discriminator-B -> [Real/Fake]
+
+**Training is done in adversial zero-sum process** which means the generator learn to better fool the discriminator and the discriminator learns to better detect the fake images.\
+
+The generator models are regularized not just to create new images in target domain, but instead translate more reconstructed versions of input images from source domain. This is acheived by using generated images as input to the corresponding generator model and comparing the output image to the original images. **Passing an image through both the generators is called Cycle.** Together each pair od generator models are trained to better produce the original source image, reffered to as *cycle consistency*.
+
+- Domain-B -> Generator-A -> Domain-A -> Generator-B ->Domain-B
+- Domain-A -> Generator-B -> Domain-B -> Generator-A -> Domain-A
+
