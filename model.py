@@ -1,50 +1,43 @@
 import gradio as gr
-import numpy as np
 from tensorflow.keras.models import load_model
-from tensorflow.keras.preprocessing.image import img_to_array
-from tensorflow.keras.preprocessing.image import load_img
-from tensorflow.keras.models import Model
+from tensorflow.keras.layers import Input
+from tensorflow_addons.layers import InstanceNormalization
+import numpy as np
+from PIL import Image
 
-# define input shape of the model
-image_shape = (256, 256, 3)
+def load_image(img):
+    with open(img.name, 'rb') as f:
+        img_data = f.read()
+    return img_data
 
-# load models
-g_model_AtoB = load_model('g_model_AtoB.h5')
-g_model_BtoA = load_model('g_model_BtoA.h5')
+def translate_image(image):
+    # load the model
+    cust = {'InstanceNormalization': InstanceNormalization}
+    model_AtoB = load_model('/kaggle/input/models/g_model_AtoB_000700.h5', cust)
+    # convert to numpy array
+    image_np = np.array(image)
+    image = Resizing(256, 256)(image)
+    # normalize pixels
+    image_np = (image_np - 127.5) / 127.5
+    # add batch dimension
+    image_np = np.expand_dims(image_np, axis=0)
+    # translate image
+    image_tar = model_AtoB.predict(image_np)
+    # scale from [-1,1] to [0,1]
+    image_tar = (image_tar + 1) / 2.0
+    # convert back to PIL image
+    image_tar = (image_tar[0] * 255).astype(np.uint8)
+    image_tar = Image.fromarray(image_tar)
+    return image_tar
 
-# define a function to perform image translation
-def translate_image(input_image, direction):
-    # load the input image
-    img = load_img(input_image, target_size=image_shape)
-    # convert the image to a numpy array
-    img = img_to_array(img)
-    # scale the pixel values to the range of [-1, 1]
-    img = (img - 127.5) / 127.5
-    # expand the dimensions of the image to match the model's input shape
-    img = np.expand_dims(img, axis=0)
-    # define the model to be used for translation
-    if direction == 'AtoB':
-        model = g_model_AtoB
-    else:
-        model = g_model_BtoA
-    # perform the translation
-    translated_image = model.predict(img)
-    # rescale the pixel values to the range of [0, 255]
-    translated_image = (translated_image + 1) / 2.0 * 255.0
-    # convert the numpy array to an image object
-    translated_image = translated_image[0].astype(np.uint8)
-    # return the translated image
-    return translated_image
 
-# create a user interface to allow users to upload images and visualize the translated images
-inputs = [
-    gr.inputs.Image(label='Input Image'),
-    gr.inputs.Radio(['AtoB', 'BtoA'], label='Translation Direction')
-]
 
-outputs = gr.outputs.Image(label='Translated Image')
+# create the interface
+input_image = gr.inputs.Image(type="pil")
+output_image = gr.outputs.Image(type="pil")
 
-title = 'CycleGAN Image Translation'
-description = 'Translate an image from one domain to another using CycleGAN.'
+iface = gr.Interface(fn=translate_image, inputs=input_image, outputs=output_image, 
+                     title="Image-to-Image Translation", 
+                     description="Translate an image from one domain to another using CycleGAN")
 
-gr.Interface(fn=translate_image, inputs=inputs, outputs=outputs, title=title, description=description).launch()
+iface.launch()
