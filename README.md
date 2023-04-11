@@ -41,5 +41,5 @@ Next step in the Architecture is **identity mapping**. In this step the generato
 
 ![Simplified Architecture of CycleGAN](https://i.ibb.co/BVDkhVV/Screenshot-2023-04-06-at-7-40-10-AM.png)
 
-##Screenshots
+## Screenshots
 ![Model](https://i.ibb.co/Y3ykG0H/Screenshot-2023-04-11-at-9-59-57-AM.png)
