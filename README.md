@@ -1,5 +1,5 @@
 
-#  Image to Image translation using CycleGAN  🌌
+#  Image to Image translation using CycleGAN 🌌
 
 In this project we will create deep convulational neural networks for image-to-image translation tasks.
 Unlike other GANs, CycleGAN does not require a dataset of paired images.
