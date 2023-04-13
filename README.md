@@ -16,6 +16,7 @@ The code was implemented after taking reference from the Paper by Jan-Yan Zhu in
 - CycleGAN is a technique for training unsupervised image translation models via the GAN architecture using unpaired collections of images from two different domains.
 - CycleGAN has been demonstrated on a range of applications including season translation, object transfiguration, style transfer, and generating photos from paintings.
 
+**The CycleGAN is an extension of the GAN architecture that involves the simultaneous training of two generator models and two discriminator models.**
 
 <img src='Images/paired_unpaired.jpeg' alt='paired_unpaired' width='40%'/>
 
