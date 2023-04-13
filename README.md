@@ -124,5 +124,9 @@ We can summarize the inputs and outputs as:
 
 
 
-## Screenshots
-![Model](https://i.ibb.co/Y3ykG0H/Screenshot-2023-04-11-at-9-59-57-AM.png)
+## Output
+<p align = 'center'>
+  <img src = 'Images/output1.png' width='60%'/>
+  <img src = 'Images/output2.png' width='60%'/>
+  <img src = 'Images/output3.png' width='60%'/>
+ </p>
