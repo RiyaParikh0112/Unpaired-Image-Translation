@@ -87,6 +87,33 @@ The discriminator is connected to the output of the generator in order to classi
 
 To summarize, a composite model has two inputs for the real photos from Domain-A and Domain-B, and four outputs for the discriminator output, identity generated image, forward cycle generated image, and backward cycle generated image.
 
+**Generator-A Composite Model (BtoA or scenary to painting)**
+
+The inputs, transformations, and outputs of the model are as follows:
+
+- Adversarial Loss: Domain-B -> Generator-A -> Domain-A -> Discriminator-A -> [real/fake]
+- Identity Loss: Domain-A -> Generator-A -> Domain-A
+- Forward Cycle Loss: Domain-B -> Generator-A -> Domain-A -> Generator-B -> Domain-B
+- Backward Cycle Loss: Domain-A -> Generator-B -> Domain-B -> Generator-A -> Domain-A
+
+We can summarize the inputs and outputs as:
+
+- Inputs: Domain-B, Domain-A
+- Outputs: Real, Domain-A, Domain-B, Domain-A
+- Generator-B Composite Model (AtoB or Horse to Zebra)
+
+The inputs, transformations, and outputs of the model are as follows:
+
+- Adversarial Loss: Domain-A -> Generator-B -> Domain-B -> Discriminator-B -> [real/fake]
+- Identity Loss: Domain-B -> Generator-B -> Domain-B
+- Forward Cycle Loss: Domain-A -> Generator-B -> Domain-B -> Generator-A -> Domain-A
+- Backward Cycle Loss: Domain-B -> Generator-A -> Domain-A -> Generator-B -> Domain-B
+
+We can summarize the inputs and outputs as:
+
+- Inputs: Domain-A, Domain-B
+- Outputs: Real, Domain-B, Domain-A, Domain-B
+
 
 
 ## Screenshots
