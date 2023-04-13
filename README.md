@@ -68,6 +68,8 @@ The discriminator design is based on the effective receptive field of the model,
 
 The output of the model depends on the size of the input image but may be one value or a square activation map of values. Each value is a probability for the likelihood that a patch in the input image is real. These values can be averaged to give an overall likelihood or classification score if needed.
 
+<img src='Images/discriminator.jpeg' width = '80%'/>
+
 ## 2. Generator 🥷
 
 The generator is an encoder-decoder model architecture. The model takes a source image (e.g. scenary photo) and generates a target image (e.g. van gogh photo). It does this by first downsampling or encoding the input image down to a bottleneck layer, then interpreting the encoding with a number of ResNet layers that use skip connections, followed by a series of layers that upsample or decode the representation to the size of the output image.\
