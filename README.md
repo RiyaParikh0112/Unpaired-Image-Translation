@@ -71,5 +71,22 @@ The output of the model depends on the size of the input image but may be one va
 The generator is an encoder-decoder model architecture. The model takes a source image (e.g. scenary photo) and generates a target image (e.g. van gogh photo). It does this by first downsampling or encoding the input image down to a bottleneck layer, then interpreting the encoding with a number of ResNet layers that use skip connections, followed by a series of layers that upsample or decode the representation to the size of the output image.\
 we can define a function that will create the 9-resnet block version for 256×256 input images. This can easily be changed to the 6-resnet block version by setting image_shape to (128x128x3) and n_resnet function argument to 6.
 
+## 3. Composite Model
+Altogether, each generator model is optimized via the combination of four outputs with four loss functions:
+
+- Adversarial loss (L2 or mean squared error).
+- Identity loss (L1 or mean absolute error).
+- Forward cycle loss (L1 or mean absolute error).
+- Backward cycle loss (L1 or mean absolute error).
+This can be achieved by defining a composite model used to train each generator model that is responsible for only updating the weights of that generator model, although it is required to share the weights with the related discriminator model and the other generator model.
+
+This is implemented in the define_composite_model() function below that takes a defined generator model (g_model_1) as well as the defined discriminator model for the generator models output (d_model) and the other generator model (g_model_2). The weights of the other models are marked as not trainable as we are only interested in updating the first generator model, i.e. the focus of this composite model.
+
+The discriminator is connected to the output of the generator in order to classify generated images as real or fake. A second input for the composite model is defined as an image from the target domain (instead of the source domain), which the generator is expected to output without translation for the identity mapping. Next, forward cycle loss involves connecting the output of the generator to the other generator, which will reconstruct the source image. Finally, the backward cycle loss involves the image from the target domain used for the identity mapping that is also passed through the other generator whose output is connected to our main generator as input and outputs a reconstructed version of that image from the target domain.
+
+To summarize, a composite model has two inputs for the real photos from Domain-A and Domain-B, and four outputs for the discriminator output, identity generated image, forward cycle generated image, and backward cycle generated image.
+
+
+
 ## Screenshots
 ![Model](https://i.ibb.co/Y3ykG0H/Screenshot-2023-04-11-at-9-59-57-AM.png)
