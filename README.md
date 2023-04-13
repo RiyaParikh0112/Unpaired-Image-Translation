@@ -24,7 +24,7 @@ The code was implemented after taking reference from the Paper by Jan-Yan Zhu in
  .`
  To regularize the model, the authors introduce the constraint of cycle-consistency - if we transform from source distribution to target and then back again to source distribution, we should get samples from our source distribution.
  
- <img src = 'Images/CCl.png' width='50%'/>
+ <img src = 'Images/CCl.png' width='80%'/>
 
 
 ## Model Architecture 𝌭
