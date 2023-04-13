@@ -71,6 +71,8 @@ The output of the model depends on the size of the input image but may be one va
 The generator is an encoder-decoder model architecture. The model takes a source image (e.g. scenary photo) and generates a target image (e.g. van gogh photo). It does this by first downsampling or encoding the input image down to a bottleneck layer, then interpreting the encoding with a number of ResNet layers that use skip connections, followed by a series of layers that upsample or decode the representation to the size of the output image.\
 we can define a function that will create the 9-resnet block version for 256×256 input images. This can easily be changed to the 6-resnet block version by setting image_shape to (128x128x3) and n_resnet function argument to 6.
 
+<img src='Images/Generator.jpeg' width = '80%'>
+
 ## 3. Composite Model
 Altogether, each generator model is optimized via the combination of four outputs with four loss functions:
 
