@@ -78,6 +78,7 @@ Altogether, each generator model is optimized via the combination of four output
 - Identity loss (L1 or mean absolute error).
 - Forward cycle loss (L1 or mean absolute error).
 - Backward cycle loss (L1 or mean absolute error).
+
 This can be achieved by defining a composite model used to train each generator model that is responsible for only updating the weights of that generator model, although it is required to share the weights with the related discriminator model and the other generator model.
 
 This is implemented in the define_composite_model() function below that takes a defined generator model (g_model_1) as well as the defined discriminator model for the generator models output (d_model) and the other generator model (g_model_2). The weights of the other models are marked as not trainable as we are only interested in updating the first generator model, i.e. the focus of this composite model.
