@@ -77,7 +77,7 @@ we can define a function that will create the 9-resnet block version for 256×25
 
 <img src='Images/Generator.jpeg' width = '80%'>
 
-<img src='Images/Resnet.jpeg' width = '80%'>
+<img src='Images/Resnet.jpeg' width = '40%'>
 
 ## 3. Composite Model
 Altogether, each generator model is optimized via the combination of four outputs with four loss functions:
