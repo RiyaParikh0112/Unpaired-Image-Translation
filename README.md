@@ -60,7 +60,7 @@ Next step in the Architecture is **identity mapping**. In this step the generato
 ![Simplified Architecture of CycleGAN](https://i.ibb.co/BVDkhVV/Screenshot-2023-04-06-at-7-40-10-AM.png)
 
 ## 1. Discriminator
-The discriminator is a deep convolutional neural network that performs image classification. It takes a source image as input and predicts the likelihood of whether the target image is a real or fake image. Two discriminator models are used, one for Domain-A (horses) and one for Domain-B (zebras).
+The discriminator is a deep convolutional neural network that performs image classification. It takes a source image as input and predicts the likelihood of whether the target image is a real or fake image. Two discriminator models are used, one for Domain-A (scenary) and one for Domain-B (van gogh).
 
 The discriminator design is based on the effective receptive field of the model, which defines the relationship between one output of the model to the number of pixels in the input image. This is called a PatchGAN model and is carefully designed so that each output prediction of the model maps to a 70×70 square or patch of the input image. The benefit of this approach is that the same model can be applied to input images of different sizes, e.g. larger or smaller than 256×256 pixels.
 
