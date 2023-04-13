@@ -10,7 +10,18 @@ We want to take an image from an input domain  Di
 
 ## CycleGAN ♼
 The code was implemented after taking reference from the Paper by Jan-Yan Zhu in their 2017 paper titled [Unpaired Image-to-Image Translation using Cycle-Consistent Adversial Networks](https://arxiv.org/abs/1703.10593). \
-*The need for a paired image in the target domain is eliminated by making a two-step transformation of source domain image - first by trying to map it to target domain and then back to the original image. Mapping the image to target domain is done using a generator network and the quality of this generated image is improved by pitching the generator against a discrimintor*
+*The need for a paired image in the target domain is eliminated by making a two-step transformation of source domain image - first by trying to map it to target domain and then back to the original image. Mapping the image to target domain is done using a generator network and the quality of this generated image is improved by pitching the generator against a discrimintor* \ 
+
+## Cycle Consistency
+`Adversarial training can, in theory, learn mappings  G
+  and  F
+  that produce outputs identically distributed as target domains  Y
+  and  X
+  respectively. However, with large enough capacity, a network can map the same set of input images to any random permutation of images in the target domain, where any of the learned mappings can induce an output distribution that matches the target distribution. Thus, an adversarial loss alone cannot guarantee that the learned function can map an individual input  xi
+  to a desired output  yi
+ .`
+ To regularize the model, the authors introduce the constraint of cycle-consistency - if we transform from source distribution to target and then back again to source distribution, we should get samples from our source distribution.
+
 
 ## Model Architecture 𝌭
 
